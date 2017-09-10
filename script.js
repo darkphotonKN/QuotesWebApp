@@ -50,7 +50,7 @@ $(document).ready(function() {
     var quoteTarget = document.getElementById("quote");
 
     // pick random number between 0-4 for index call for a quote
-    var rand = Math.floor(Math.random()*4);
+    var rand = randomize(4, 0);
 
     // display new random quote
     quoteTarget.innerHTML = "<p2>" + quotes[rand] + "</p2>";
@@ -70,8 +70,8 @@ $(document).ready(function() {
   function changeBGColor() {
 
     // change background-color on every "New Quote" click
-
-    $('html,#btn-bar'/*,#quote-box,#btn-bar'*/).css("background-color", colors[index]);
+    var rands = randomize(5, 1);
+    $('html,#btn-bar'/*,#quote-box,#btn-bar'*/).css("background-color", colors[rands]);
     //$('html').css('transition', 'background-color 1s linear');
 
     //divTarget.innerHTML = "hi"; // should only display in quote box if click `works ----
@@ -85,6 +85,42 @@ $(document).ready(function() {
     }
   }
 
+  // function make random number and ensure it's not the same as previous
+  var currentRandomNum = 0.5;
+  var currentRandomNumBGColor = 0.5
+
+  function randomize(range, bgColor) {
+
+    var rand = Math.floor(Math.random()*range);
+
+    /* two different pointers and setters for current random number to not overlap
+    two different calls from random bg-color and random quote resulting in the other
+    getting a non-random recurrent result */
+
+    if(bgColor==0) {
+      while(rand == currentRandomNum) {
+        // randomize again if number is still the same as previous random number
+        rand = Math.floor(Math.random()*range);
+      }
+
+
+      // set previous random number into newly generated one
+      currentRandomNum = rand;
+    }
+    if(bgColor==1) {
+      while(rand == currentRandomNumBGColor) {
+        // randomize again if number is still the same as previous random number
+        rand = Math.floor(Math.random()*range);
+      }
+
+
+      // set previous random number into newly generated one
+      currentRandomNumBGColor = rand;
+    }
+
+    // returns newly generated random num for use
+    return rand;
+  }
 
 
 
