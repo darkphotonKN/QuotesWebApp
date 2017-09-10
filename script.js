@@ -49,7 +49,11 @@ $(document).ready(function() {
     // javascript
     var quoteTarget = document.getElementById("quote");
 
-    quoteTarget.innerHTML = "<p2>" + quotes[indexQuotes] + "</p2>";
+    // pick random number between 0-4 for index call for a quote
+    var rand = Math.floor(Math.random()*4);
+
+    // display new random quote
+    quoteTarget.innerHTML = "<p2>" + quotes[rand] + "</p2>";
 
     /* work in progress - making quotes fade out and in
     var $quoteTargetJQuery = $('#quote');
@@ -61,13 +65,6 @@ $(document).ready(function() {
 
     }, 500);
     */
-
-
-    if(indexQuotes<(quotes.length-1)) {
-      indexQuotes++;
-    } else {
-      indexQuotes = 0;
-    }
   }
 
   function changeBGColor() {
