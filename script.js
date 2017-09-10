@@ -18,7 +18,6 @@ $(document).ready(function() {
   var indexQuotes = 1; // array initial index pointer for quotes
 
   // first quote set up
-
   var initialQuoteTarget = document.getElementById('quote');
   initialQuoteTarget.innerHTML = quotes[0];
 
@@ -27,18 +26,22 @@ $(document).ready(function() {
 
 
   $('#btn-new').click(function() {
-
     //setTimeout(function() {
     // shift color upon click when quote changes
     changeBGColor();
 
     //}, 500);
-    //setTimeOut(function() {
+
+
+    //$("#container").fadeOut(function() {
+      //$(this).text("World")
+      //}).fadeIn();
+
+    setTimeout(function() {
       nextQuote();
-    //}, 500);
+    }, 800);
 
   });
-
 
 
   // cycles quote displayed in quote-box
@@ -47,13 +50,23 @@ $(document).ready(function() {
     // jquery
     // var quoteTarget = $('#quote-box');
     // javascript
-    var quoteTarget = document.getElementById("quote");
+
+    // plain js version:
+    //var quoteTarget = document.getElementById("quote");
+
+    // jquery version:
+    var $quoteTarget = $('#quote');
 
     // pick random number between 0-4 for index call for a quote
     var rand = randomize(4, 0);
 
     // display new random quote
-    quoteTarget.innerHTML = "<p2>" + quotes[rand] + "</p2>";
+    var newQuote = quotes[rand];
+    //var $fadeInQuote = newQuote.fadeIn();
+    $quoteTarget.text(newQuote).fadeIn();//$fadeInQuote;
+
+    // testing
+    console.log(rand);
 
     /* work in progress - making quotes fade out and in
     var $quoteTargetJQuery = $('#quote');
@@ -76,16 +89,11 @@ $(document).ready(function() {
 
     //divTarget.innerHTML = "hi"; // should only display in quote box if click `works ----
 
-    console.log(index);
-
-    if(index < 4) { // cannot be at 4 as we dont want to increment it at index = 4
-      index++;
-    } else {
-      index = 0; // reset the index to get a loop back to first color
-    }
+    // testing
+    console.log(rands);
   }
 
-  // function make random number and ensure it's not the same as previous
+  // function to make random number and ensure it's not the same as previous
   var currentRandomNum = 0.5;
   var currentRandomNumBGColor = 0.5
 
